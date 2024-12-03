@@ -1,8 +1,8 @@
 const bcrypt = require('bcrypt');
 
 const testPasswordHashing = async () => {
-    const plainTextPassword = 'Raja@2023'; // The password you used to register
-    const hashedPassword = '$2b$10$CKSTHJQlQY/W7NR/6NtIauvM67oqqD66qUInjuXOxtBGyeH.NhYD2'; // Replace this with the actual hashed password from your DB
+    const plainTextPassword = 'Sara@2023'; // The password you used to register
+    const hashedPassword = '$2b$10$jgxIFgMn7B5Omtxa7s/I9.Zn81xKXW0ouXhGBKGtAAok9/odAksXm'; // Replace this with the actual hashed password from your DB
 
     // Hash the plain text password
     const newHashedPassword = await bcrypt.hash(plainTextPassword, 10);

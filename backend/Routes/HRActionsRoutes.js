@@ -1,10 +1,11 @@
 const express = require('express');
-const EmployeeModel = require('../Models/EmployeeModel'); // Assuming EmployeeModel is in the Models folder
+const EmployeeModel = require('../Models/EmployeeModel'); 
 const router = express.Router();
 
-// Approve or reject a leave request
+    // Approve or reject a leave request
 router.post('/approve-leave', async (req, res) => {
-    const { employeeId, leaveId, status } = req.body; // Status can be 'approved' or 'rejected'
+    const { employeeId, leaveId, status } = req.body; 
+    // Status can be 'approved' or 'rejected'
 
     try {
         const employee = await EmployeeModel.findById(employeeId);

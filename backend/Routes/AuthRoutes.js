@@ -52,10 +52,10 @@ router.post('/login', async (req, res) => {
         }
 
         // Generate JWT token
-        const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ _id: user._id, role: user.role,empId:user.employee }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
         // Send response with token and role
-        return res.json({ success: true, token, role: user.role });
+        return res.json({ success: true, token, role: user.role, _id: user._id,empId:user.employee});
     } catch (err) {
         console.error('Server error:', err);
         return res.status(500).json({ success: false, message: 'Server error, please try again later.' });

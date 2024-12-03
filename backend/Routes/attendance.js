@@ -8,6 +8,6 @@ router.post('/check-in', authMiddleware.verifyEmployee, attendanceController.che
 router.post('/check-out', authMiddleware.verifyEmployee, attendanceController.checkOut);
 
 // HR to view attendance records
-router.get('/', authMiddleware.getRole, attendanceController.getAllAttendanceRecords);
+router.get('/', attendanceController.getAllAttendanceRecords);
 
 module.exports = router;

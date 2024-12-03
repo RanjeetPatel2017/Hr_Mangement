@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+
 
 // Define the User Schema
 const userSchema = new mongoose.Schema({
@@ -17,6 +17,7 @@ const userSchema = new mongoose.Schema({
         enum: ['HR', 'Employee'], // Define the possible roles
         required: true,
     },
+    employee: { type: mongoose.Schema.Types.ObjectId, ref: 'Employee' },
 });
 
 // Middleware to hash password before saving user

@@ -1,20 +1,43 @@
 const EmployeeModel = require("../Models/EmployeeModel");
+const UserModel = require("../Models/UserModel");
+const bcrypt = require('bcrypt');
 const { options } = require("../Routes/EmployeeRoutes");
 
 const createEmployee = async (req,res)=>{
     try{
         const body = req.body;
         body.profileImage = req.file ? req.file?.path: null;
-        console.log(body);
+        console.log("submitted employee", body);
+        let hashedPassword;
+
+        if (body.password) {
+             hashedPassword = await bcrypt.hash(body. password, 10);
+            body.password = hashedPassword;
+        } else {
+        return res.status(400).json({
+        message: 'Password is required',
+        success: false
+        });
+    }
+    console.log('Processed employee data:', body);
+
         const emp = new EmployeeModel(body);
-        await emp.save();
+        const savedEmployee = await emp.save();
+        const user = new UserModel({
+            email: savedEmployee.email,
+            password: hashedPassword, // Use the same hashed password
+            role: savedEmployee.role, // Set role (likely 'Employee')
+            employee: savedEmployee._id, // Store the EmployeeModel's ObjectId for reference
+          });
+          await user.save();
         res.status(201)
             .json({
-                message: "Employee created",
+                message: "Employee and user created successfully",
                 success: true,
             })
 
     }catch(err){
+        console.error('Error creating employee:', err);
         res.status(500).json({
             mesaage: 'Internal server error',
             success: false,

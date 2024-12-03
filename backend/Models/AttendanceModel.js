@@ -7,13 +7,10 @@ const attendanceSchema = new mongoose.Schema({
         required: [true, 'Employee is required'],
     },
     geolocation: {
-        type: String,
+        type:Object,
         required: true
     },
-    status: {
-        type: String,
-        required: true
-    },
+    
     checkInTime: {
         type: Date
     },
